@@ -48,7 +48,7 @@
 
 EDA 결과 신용등급은 Good, Standard, Poor의 다중분류 구조를 가지며, Standard 클래스의 비율이 가장 높은 불균형 데이터 형태를 보였다.
 이때 LabelEncoder를 이용해서 Good -> 0, Poor -> 1, Standard ->2 로 변환하였다.
-<img width="912" height="617" alt="image" src="https://github.com/user-attachments/assets/eb1da9f7-fe9c-4899-a0a4-c1d4265ed7ec" />
+<img src="https://github.com/user-attachments/assets/eb1da9f7-fe9c-4899-a0a4-c1d4265ed7ec" width="60%" />
 
 또한 주요 변수 분석 결과 다음과 같은 특징을 확인하였다.
 
