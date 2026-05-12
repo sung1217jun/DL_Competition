@@ -51,20 +51,21 @@ EDA 결과 신용등급은 Good, Standard, Poor의 다중분류 구조를 가지
 <img width="912" height="617" alt="image" src="https://github.com/user-attachments/assets/eb1da9f7-fe9c-4899-a0a4-c1d4265ed7ec" />
 
 
+```markdown
 또한 주요 변수 분석 결과 다음과 같은 특징을 확인하였다.
 
 * Outstanding_Debt가 증가할수록 Poor 비율 증가
 * Delay_from_due_date 증가 시 신용등급 하락 경향
 * Interest_Rate가 높을수록 금융 위험 증가
 * Num_of_Delayed_Payment가 신용등급과 높은 연관성 보임
-  
-<img width="981" height="711" alt="image" src="https://github.com/user-attachments/assets/5f5505ed-228c-4b2b-8fdb-a1a7c7e9870e" />
 
-<img width="970" height="654" alt="image" src="https://github.com/user-attachments/assets/43f7cd4c-5cce-4248-94fe-7fa606f4aed4" />
-
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5f5505ed-228c-4b2b-8fdb-a1a7c7e9870e" width="45%">
+  <img src="https://github.com/user-attachments/assets/43f7cd4c-5cce-4248-94fe-7fa606f4aed4" width="45%">
+</p>
 
 이를 기반으로 연체 및 부채 관련 파생변수를 추가 생성하고 모델 학습에 활용하였다.
+```
 
 ---
 
