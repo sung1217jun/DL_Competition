@@ -48,7 +48,7 @@
 
 EDA 결과 신용등급은 Good, Standard, Poor의 다중분류 구조를 가지며, Standard 클래스의 비율이 가장 높은 불균형 데이터 형태를 보였다.
 이때 LabelEncoder를 이용해서 Good -> 0, Poor -> 1, Standard ->2 로 변환하였다.
-<img src="https://github.com/user-attachments/assets/eb1da9f7-fe9c-4899-a0a4-c1d4265ed7ec" width="60%" />
+<p align="center"> <img src="https://github.com/user-attachments/assets/eb1da9f7-fe9c-4899-a0a4-c1d4265ed7ec" width="70%" /> </p>
 
 또한 주요 변수 분석 결과 다음과 같은 특징을 확인하였다.
 
@@ -84,7 +84,7 @@ TabNet은 Attention 기반 Feature Selection 구조를 활용하여 중요한 fe
 
 또한 mutual information 기반 Feature Selection을 적용하여 타깃과 관련성이 높은 feature를 우선적으로 학습하도록 구성하였다.
 
-<img width="1283" height="598" alt="image" src="https://github.com/user-attachments/assets/f08ff7d5-8576-473a-b738-4ab3e56d70ee" />
+<p align="center"> <img src="https://github.com/user-attachments/assets/f08ff7d5-8576-473a-b738-4ab3e56d70ee" width="75%"> </p>
 
 
 ---
@@ -97,7 +97,7 @@ Classification Report 결과 Good, Poor, Standard 클래스 모두 비교적 안
 
 추가적으로 Credit_History_Age 개월 수 변환, Type_of_Loan 멀티핫 인코딩, 파생변수 강화 등의 실험도 진행하였으나 기존 모델 대비 Validation Score가 감소하여 최종적으로 기존 TabNet 모델을 채택하였다.
 
-<img width="686" height="682" alt="image" src="https://github.com/user-attachments/assets/dd02fe02-b604-4756-b6e9-a624538b7367" />
+<p align="center"> <img src="https://github.com/user-attachments/assets/dd02fe02-b604-4756-b6e9-a624538b7367" width="55%"> </p>
 
 ---
 
@@ -119,5 +119,5 @@ TabNet Feature Importance 분석 결과, 금융 위험도와 직접적으로 관
 
 이는 EDA 과정에서 확인한 “부채 규모 증가”, “연체 증가”, “이자율 상승”이 신용등급 하락과 밀접한 관련이 있다는 분석 결과와 유사한 흐름을 보였다.
 
-<img width="1183" height="786" alt="image" src="https://github.com/user-attachments/assets/6f574347-b524-4bbf-8dfe-a618b3ea9675" />
+<p align="center"> <img src="https://github.com/user-attachments/assets/6f574347-b524-4bbf-8dfe-a618b3ea9675" width="70%"> </p>
 
