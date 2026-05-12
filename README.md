@@ -50,8 +50,6 @@ EDA 결과 신용등급은 Good, Standard, Poor의 다중분류 구조를 가지
 이때 LabelEncoder를 이용해서 Good -> 0, Poor -> 1, Standard ->2 로 변환하였다.
 <img width="912" height="617" alt="image" src="https://github.com/user-attachments/assets/eb1da9f7-fe9c-4899-a0a4-c1d4265ed7ec" />
 
-
-```markdown
 또한 주요 변수 분석 결과 다음과 같은 특징을 확인하였다.
 
 * Outstanding_Debt가 증가할수록 Poor 비율 증가
@@ -65,7 +63,6 @@ EDA 결과 신용등급은 Good, Standard, Poor의 다중분류 구조를 가지
 </p>
 
 이를 기반으로 연체 및 부채 관련 파생변수를 추가 생성하고 모델 학습에 활용하였다.
-```
 
 ---
 
