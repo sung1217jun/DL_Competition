@@ -121,7 +121,5 @@ TabNet Feature Importance 분석 결과, 금융 위험도와 직접적으로 관
 
 이는 EDA 과정에서 확인한 “부채 규모 증가”, “연체 증가”, “이자율 상승”이 신용등급 하락과 밀접한 관련이 있다는 분석 결과와 유사한 흐름을 보였다.
 
-<p align="center">
-  <img src="<img width="1183" height="786" alt="image" src="https://github.com/user-attachments/assets/a102afcf-1091-47b9-8295-9994d8813a6a" />" width="85%">
-</p>
+<img width="1183" height="786" alt="image" src="https://github.com/user-attachments/assets/6f574347-b524-4bbf-8dfe-a618b3ea9675" />
 
