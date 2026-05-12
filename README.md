@@ -112,3 +112,16 @@ Classification Report 결과 Good, Poor, Standard 클래스 모두 비교적 안
 * 추가 Feature Engineering 실험 진행 및 비교 분석 수행
 
 ---
+
+## Feature Importance Analysis
+
+TabNet Feature Importance 분석 결과, 금융 위험도와 직접적으로 관련된 변수들이 높은 중요도를 가지는 것을 확인하였다.
+
+특히 `Outstanding_Debt`, `Interest_Rate`, `Debt_to_Income`, `Delay_from_due_date` 등의 변수는 고객의 신용 상태를 예측하는 데 핵심적인 역할을 수행하였다. 또한 `Delay_Payment_Risk`, `Inquiry_per_Card`와 같은 파생변수 역시 높은 중요도를 보이며, 단순 원본 변수보다 금융 위험 패턴을 효과적으로 반영하는 것을 확인할 수 있었다.
+
+이는 EDA 과정에서 확인한 “부채 규모 증가”, “연체 증가”, “이자율 상승”이 신용등급 하락과 밀접한 관련이 있다는 분석 결과와 유사한 흐름을 보였다.
+
+<p align="center">
+  <img src="<img width="1183" height="786" alt="image" src="https://github.com/user-attachments/assets/a102afcf-1091-47b9-8295-9994d8813a6a" />" width="85%">
+</p>
+
