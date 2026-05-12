@@ -1,50 +1,114 @@
-딥러닝 컴페티션: 고객 신용 등급 분류 예측 모델
-1. 프로젝트 개요
-본 프로젝트는 고객의 금융 활동 데이터를 바탕으로 신용 등급(Good, Standard, Poor)을 예측하는 다중 분류 모델을 구축하는 것을 목표로 합니다. 정형 데이터 학습에 특화된 딥러닝 모델인 TabNet을 활용하여 모델의 성능을 확보하고, 어떤 피처가 신용 등급 결정에 중요한 영향을 미치는지 분석하여 모델의 설명력을 높이는 데 집중하였습니다.
+# Credit Score Classification using TabNet
 
-2. 데이터 전처리 및 파생변수 생성
-데이터의 노이즈를 제거하고 모델의 학습 효율을 높이기 위해 다음과 같은 전처리와 파생변수 생성 전략을 수립하였습니다.
+고객의 금융 및 신용 데이터를 활용하여 신용등급(Credit Score)을 분류하는 딥러닝 기반 프로젝트를 진행하였다.
+본 프로젝트에서는 정형 데이터 딥러닝 모델인 TabNet을 활용하여 고객의 금융 패턴을 학습하고, Good / Standard / Poor 신용등급을 예측하였다.
 
-데이터 클리닝: 고객 식별용 변수인 ID, Customer_ID, Name, SSN은 일반화 성능에 도움이 되지 않으므로 제거하였습니다. 수치형 변수의 결측치는 학습 데이터의 중앙값을 기준으로 대체하여 데이터 누수를 방지했습니다.
+<br>
 
-범주형 변수 처리: TabNet 모델 학습을 위해 Ordinal Encoding을 적용하였습니다.
+## 프로젝트 개요
 
-파생변수 생성: 금융 데이터의 특성을 반영하여 부채 대비 소득 비율(Debt_to_Income), 월급 대비 EMI 비율(EMI_to_Salary), 연체 위험도(Delay_Payment_Risk), 신용 이력 대비 위험도(Debt_per_History, Delayed_per_History) 등 총 9종 이상의 핵심 파생변수를 생성하여 모델의 입력값으로 활용했습니다.
+금융 데이터에는 고객의 연체 정보, 부채 규모, 이자율, 투자 금액, 카드 사용률 등 다양한 정보가 포함되어 있다.
+이러한 데이터를 기반으로 고객의 신용 상태를 예측하는 것은 금융권의 리스크 관리 및 고객 평가 측면에서 매우 중요한 문제이다.
 
-이미지 추천: 전처리가 완료된 데이터프레임의 상단 결과(df.head())나 파생변수 생성 코드 블록 캡처본을 여기에 배치하세요.
+본 프로젝트에서는 금융 데이터 특성을 반영한 전처리 및 파생변수 생성을 수행하였으며, TabNet 모델을 활용하여 신용등급 분류 성능을 향상시키는 것을 목표로 하였다.
 
-3. EDA (탐색적 데이터 분석)
-데이터 분석을 통해 타겟 클래스의 불균형과 변수 간의 관계를 확인하였습니다.
+---
 
-클래스 분포: 신용 등급 중 'Standard' 클래스의 비중이 가장 높은 불균형 데이터임을 확인하였습니다. 이에 따라 정확도(Accuracy)뿐만 아니라 Weighted F1-score를 주요 평가 지표로 설정하였습니다.
+## 사용 기술
 
-변수 간 관계: 연체 횟수(Num_of_Delayed_Payment)와 연체 일수(Delay_from_due_date)가 증가할수록 'Poor' 등급의 비율이 급격히 높아지는 경향을 확인하였으며, 이자율과 부채 규모 역시 등급 결정에 밀접한 관련이 있음을 파악했습니다.
+* Python
+* Pandas
+* NumPy
+* Scikit-learn
+* PyTorch
+* PyTorch TabNet
+* Matplotlib
 
-이미지 추천: 신용 등급 클래스 분포 막대 그래프나, 주요 수치형 변수의 Boxplot 시각화 결과 사진을 배치하세요.
+---
 
-4. 모델 선택 및 하이퍼파라미터 튜닝
-Feature Selection: Mutual Information(상호 정보량) 기반으로 타겟과 관련성이 높은 상위 25개 변수를 선별하여 학습에 사용했습니다.
+## 데이터 전처리
 
-모델 선택: 정형 데이터에 최적화된 TabNet 모델을 선택했습니다. Attention 메커니즘을 통해 중요한 피처를 단계적으로 선택하는 특성이 금융 데이터 분류에 적합하다고 판단했습니다.
+데이터 전처리 단계에서는 고객 식별 목적의 변수인 ID, Customer_ID, Name, SSN 등을 제거하였다.
+해당 변수들은 모델의 일반화 성능 향상에 도움이 되지 않고 과적합 가능성을 높일 수 있기 때문이다.
 
-최적화 전략: AdamW 옵티마이저와 StepLR 스케줄러를 적용하여 학습률을 조정하였으며, Early Stopping을 통해 과적합을 방지하고 최적의 가중치를 도출했습니다.
+범주형 변수는 TabNet 학습이 가능하도록 Ordinal Encoding을 적용하였으며, 결측치는 train 데이터 기준 중앙값 및 "Unknown" 값으로 처리하였다. 또한 데이터 누수를 방지하기 위해 encoder와 scaler는 train 데이터에 대해서만 fit을 수행하였다.
 
-5. 최종 성능 및 결과 분석
-모델 평가 결과, 학습에 사용하지 않은 검증 데이터에서 안정적인 성능을 기록하였습니다.
+추가적으로 금융 데이터 특성을 반영하기 위해 다음과 같은 파생변수를 생성하였다.
 
-최종 스코어:
+* Debt_to_Income
+* EMI_to_Salary
+* Delay_Payment_Risk
+* Inquiry_per_Card
 
-Validation Accuracy: 0.7564
+이를 통해 단순 원본 변수보다 고객의 금융 위험도를 효과적으로 반영할 수 있도록 구성하였다.
 
-Validation F1 Score: 0.7566
+---
 
-설명력 확인: 모델의 Feature Importance를 분석한 결과, 연체 횟수, 연체 일수, 부채 규모 등 금융 상환 능력과 직결되는 변수들이 높은 중요도를 기록하며 비즈니스 로직에 부합하는 결과를 보였습니다.
+## EDA 및 데이터 분석
 
-이미지 추천: 최종 모델의 'Classification Report' 결과 표와 'TabNet Feature Importance Top 15' 막대 그래프 캡처본을 반드시 배치하세요.
+EDA 결과 신용등급은 Good, Standard, Poor의 다중분류 구조를 가지며, Standard 클래스의 비율이 가장 높은 불균형 데이터 형태를 보였다.
+이때 LabelEncoder를 이용해서 Good -> 0, Poor -> 1, Standard ->2 로 변환하였다.
+<img width="912" height="617" alt="image" src="https://github.com/user-attachments/assets/eb1da9f7-fe9c-4899-a0a4-c1d4265ed7ec" />
 
-6. 개선 사항 및 회고
-다양한 실험을 통해 모델을 고도화하려 노력했습니다.
 
-실험 내용: 추가적인 파생변수 확장 및 멀티핫 인코딩을 시도하였으나, 피처 수가 과도하게 증가할 경우 TabNet이 핵심 정보에 집중하지 못해 성능이 소폭 하락하는 현상을 확인했습니다. 이를 통해 적절한 피처 수 유지의 중요성을 체득했습니다.
+또한 주요 변수 분석 결과 다음과 같은 특징을 확인하였다.
 
-향후 과제: TabTransformer 모델과의 비교 실험, Optuna를 활용한 하이퍼파라미터 자동 최적화, 그리고 Stratified K-Fold 적용을 통한 모델의 일반화 성능 강화를 향후 개선 방향으로 설정하였습니다.
+* Outstanding_Debt가 증가할수록 Poor 비율 증가
+* Delay_from_due_date 증가 시 신용등급 하락 경향
+* Interest_Rate가 높을수록 금융 위험 증가
+* Num_of_Delayed_Payment가 신용등급과 높은 연관성 보임
+  
+<img width="981" height="711" alt="image" src="https://github.com/user-attachments/assets/5f5505ed-228c-4b2b-8fdb-a1a7c7e9870e" />
+
+<img width="970" height="654" alt="image" src="https://github.com/user-attachments/assets/43f7cd4c-5cce-4248-94fe-7fa606f4aed4" />
+
+
+
+이를 기반으로 연체 및 부채 관련 파생변수를 추가 생성하고 모델 학습에 활용하였다.
+
+---
+
+## 모델링
+
+모델은 정형 데이터 딥러닝 모델인 TabNet을 사용하였다.
+
+TabNet은 Attention 기반 Feature Selection 구조를 활용하여 중요한 feature를 단계적으로 선택하며 학습할 수 있고, 범주형과 수치형 데이터가 혼합된 금융 데이터에 적합하다고 판단하였다.
+
+모델 성능 향상을 위해 다음 요소들을 중심으로 튜닝을 진행하였다.
+
+* n_d
+* n_a
+* n_steps
+* learning rate
+* batch size
+* StepLR scheduler
+* Early Stopping
+
+또한 mutual information 기반 Feature Selection을 적용하여 타깃과 관련성이 높은 feature를 우선적으로 학습하도록 구성하였다.
+
+<img width="1283" height="598" alt="image" src="https://github.com/user-attachments/assets/f08ff7d5-8576-473a-b738-4ab3e56d70ee" />
+
+
+---
+
+## 성능 결과
+
+최종 모델의 Validation Accuracy는 0.7564, Validation F1 Score는 0.7566으로 나타났다.
+
+Classification Report 결과 Good, Poor, Standard 클래스 모두 비교적 안정적인 precision과 recall을 보였으며, 특정 클래스에 편향되지 않은 균형 잡힌 예측 성능을 확인할 수 있었다.
+
+추가적으로 Credit_History_Age 개월 수 변환, Type_of_Loan 멀티핫 인코딩, 파생변수 강화 등의 실험도 진행하였으나 기존 모델 대비 Validation Score가 감소하여 최종적으로 기존 TabNet 모델을 채택하였다.
+
+<img width="686" height="682" alt="image" src="https://github.com/user-attachments/assets/dd02fe02-b604-4756-b6e9-a624538b7367" />
+
+---
+
+## 결과 요약
+
+* 정형 데이터 딥러닝 모델 TabNet 활용
+* 금융 특화 파생변수 생성
+* Mutual Information 기반 Feature Selection 적용
+* Validation F1 Score : 0.7566 달성
+* 추가 Feature Engineering 실험 진행 및 비교 분석 수행
+
+---
